@@ -56,7 +56,7 @@ export default function CountdownPage() {
   return (
     <div className="min-h-screen bg-[#0b0f1a] flex flex-col items-center justify-center p-4">
       <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#e6edf3] mb-8 sm:mb-12 text-center px-4">
-        Community Lab <span className="text-[#9be931]">Hackathon</span>
+         <span className="text-[#9be931] ">EDWINNOVA</span>
       </h1>
 
       <div className="flex flex-wrap justify-center gap-3 sm:gap-4 md:gap-6 max-w-4xl mx-auto px-4">
