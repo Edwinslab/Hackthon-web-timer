@@ -1,11 +1,72 @@
+// "use client";
+// import { useEffect, useRef } from "react";
+
+// export default function Cursor() {
+//   const cursorRef = useRef<HTMLDivElement>(null);
+//   const ringRef = useRef<HTMLDivElement>(null);
+
+//   useEffect(() => {
+//     let mouseX = 0,
+//       mouseY = 0;
+//     let ringX = 0,
+//       ringY = 0;
+
+//     const moveCursor = (e: MouseEvent) => {
+//       mouseX = e.clientX;
+//       mouseY = e.clientY;
+//       if (cursorRef.current) {
+//         cursorRef.current.style.left = mouseX + "px";
+//         cursorRef.current.style.top = mouseY + "px";
+//       }
+//     };
+
+//     const animateRing = () => {
+//       ringX += (mouseX - ringX) * 0.12;
+//       ringY += (mouseY - ringY) * 0.12;
+//       if (ringRef.current) {
+//         ringRef.current.style.left = ringX + "px";
+//         ringRef.current.style.top = ringY + "px";
+//       }
+//       requestAnimationFrame(animateRing);
+//     };
+
+//     window.addEventListener("mousemove", moveCursor);
+//     animateRing();
+//     return () => window.removeEventListener("mousemove", moveCursor);
+//   }, []);
+
+//   return (
+//     <>
+//       <div ref={cursorRef} className="cursor" />
+//       <div ref={ringRef} className="cursor-ring" />
+//     </>
+//   );
+// }
+
+
 "use client";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function Cursor() {
   const cursorRef = useRef<HTMLDivElement>(null);
   const ringRef = useRef<HTMLDivElement>(null);
+  const [isDesktop, setIsDesktop] = useState(false);
 
   useEffect(() => {
+    // detect screen size
+    const checkDevice = () => {
+      setIsDesktop(window.innerWidth >= 768); // Tailwind md breakpoint
+    };
+
+    checkDevice();
+    window.addEventListener("resize", checkDevice);
+
+    return () => window.removeEventListener("resize", checkDevice);
+  }, []);
+
+  useEffect(() => {
+    if (!isDesktop) return; // ❌ stop cursor logic on mobile
+
     let mouseX = 0,
       mouseY = 0;
     let ringX = 0,
@@ -14,6 +75,7 @@ export default function Cursor() {
     const moveCursor = (e: MouseEvent) => {
       mouseX = e.clientX;
       mouseY = e.clientY;
+
       if (cursorRef.current) {
         cursorRef.current.style.left = mouseX + "px";
         cursorRef.current.style.top = mouseY + "px";
@@ -23,17 +85,23 @@ export default function Cursor() {
     const animateRing = () => {
       ringX += (mouseX - ringX) * 0.12;
       ringY += (mouseY - ringY) * 0.12;
+
       if (ringRef.current) {
         ringRef.current.style.left = ringX + "px";
         ringRef.current.style.top = ringY + "px";
       }
+
       requestAnimationFrame(animateRing);
     };
 
     window.addEventListener("mousemove", moveCursor);
     animateRing();
+
     return () => window.removeEventListener("mousemove", moveCursor);
-  }, []);
+  }, [isDesktop]);
+
+  // ✅ don't render anything on mobile
+  if (!isDesktop) return null;
 
   return (
     <>
