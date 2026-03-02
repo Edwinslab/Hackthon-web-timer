@@ -327,7 +327,7 @@ export default function Apply() {
         className="absolute top-8 left-8 font-mono text-xs"
         style={{ color: "#9BE931" }}
       >
-        {"// APPLY"}
+      
       </motion.div>
       <motion.div
         initial={{ opacity: 0 }}
@@ -362,7 +362,7 @@ export default function Apply() {
               letterSpacing: "-0.02em",
             }}
           >
-            <span className="text-white">READY TO </span>
+            <span className="text-white">COMEING      </span>
             <motion.span
               style={{ color: "#9BE931" }}
               animate={{
@@ -374,11 +374,11 @@ export default function Apply() {
               }}
               transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
             >
-              LAUNCH
+              SOON
             </motion.span>
           </h2>
 
-          <h2
+          {/* <h2
             className="font-syne font-extrabold leading-none mb-8"
             style={{
               fontSize: "clamp(2.5rem, 7vw, 5.5rem)",
@@ -388,11 +388,11 @@ export default function Apply() {
             }}
           >
             YOUR STARTUP?
-          </h2>
+          </h2> */}
         </motion.div>
 
-        {/* ── Countdown timer ── */}
-        <motion.div variants={fadeUp} className="mb-10">
+       
+        {/* <motion.div variants={fadeUp} className="mb-10">
           <p
             className="font-mono text-[10px] tracking-[0.25em] uppercase text-center mb-4"
             style={{ color: "rgba(230,237,243,0.3)" }}
@@ -423,20 +423,13 @@ export default function Apply() {
             </span>
             <CountdownUnit value={countdown.secs} label="Secs" />
           </div>
-        </motion.div>
+        </motion.div> */}
 
         {/* ── Description ── */}
-        <motion.p
-          variants={fadeUp}
-          className="font-body text-base leading-relaxed text-center max-w-xl mx-auto mb-10"
-          style={{ color: "rgba(230,237,243,0.5)" }}
-        >
-          Submit your startup idea and team details. 24 teams will be selected
-          across 3 innovation domains. Make your mark before the clock runs out.
-        </motion.p>
+    
 
         {/* ── CTA Button ── */}
-        <motion.div variants={fadeUp} className="flex justify-center mb-16">
+        {/* <motion.div variants={fadeUp} className="flex justify-center mb-16">
           <motion.a
             href="https://forms.google.com"
             target="_blank"
@@ -454,7 +447,7 @@ export default function Apply() {
             whileTap={{ scale: 0.97 }}
             transition={{ type: "spring", stiffness: 400, damping: 20 }}
           >
-            {/* Shimmer sweep on hover */}
+        
             <motion.div
               className="absolute inset-0 pointer-events-none"
               style={{
@@ -483,7 +476,7 @@ export default function Apply() {
               </motion.span>
             </span>
           </motion.a>
-        </motion.div>
+        </motion.div> */}
 
         {/* ── Team Requirements Cards ── */}
         <motion.div variants={fadeUp}>
