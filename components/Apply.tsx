@@ -362,7 +362,7 @@ export default function Apply() {
               letterSpacing: "-0.02em",
             }}
           >
-            <span className="text-white">COMEING      </span>
+            <span className="text-white">COMING      </span>
             <motion.span
               style={{ color: "#9BE931" }}
               animate={{

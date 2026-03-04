@@ -31,7 +31,7 @@ const perks = [
   {
     icon: "📈",
     title: "Equity Model",
-    desc: "In exchange: 5–10% equity stake, creating long-term institutional alignment.",
+    desc: "In exchange: 3% equity stake, creating long-term institutional alignment.",
   },
 ];
 
