@@ -58,6 +58,7 @@ import Stages from "@/components/Stages";
 import Prizes from "@/components/Prizes";
 import Sponsors from "@/components/Sponsors";
 import Incubation from "@/components/Incubation";
+import Guidelines from "@/components/Guidelines";
 import Apply from "@/components/Apply";
 import Footer from "@/components/Footer";
 import TerminalChat from "@/components/Terminal";
@@ -89,6 +90,7 @@ export default function Home() {
         <Stages />
         <Prizes />
         <Incubation />
+        <Guidelines />
         <Apply />
         <Footer />
       </div>
