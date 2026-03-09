@@ -86,7 +86,7 @@ export default function ProposalViewer() {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              padding: 24,
+              padding: "60px 24px 24px",
             }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
