@@ -70,7 +70,7 @@ export default function Stages() {
             6 Stages of <span style={{ color: "#9BE931" }}>Innovation</span>
           </h2>
         </div>
-
+{/* //lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas, doloremque. */}
         <motion.div 
           style={{ x, display: "flex", width: "600vw", willChange: "transform" }} 
           className="h-full items-center"
