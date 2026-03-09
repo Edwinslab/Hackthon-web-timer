@@ -63,6 +63,7 @@ const stats = [
   // { num: "120", label: "Entrepreneurs" },
   { num: "4", label: "Days" },
   { num: "3", label: "Domains" },
+  { num: "1", label: "Launch Pad" },
 ];
 
 export default function Hero() {
@@ -72,17 +73,17 @@ export default function Hero() {
     offset: ["start start", "end start"]
   });
 
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]);  //if u wnat overlap use a 50%
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
   const scale = useTransform(scrollYProgress, [0, 1], [1, 0.95]);
 
   return (
     <section
-      id="hero"
-      ref={ref as any}
-      className="relative min-h-screen flex items-center pt-20 overflow-hidden"
-      style={{ padding: "100px 5% 80px" }}
-    >
+  id="hero"
+  ref={ref as any}
+  className="relative min-h-[140vh] md:min-h-screen flex items-center pt-20 overflow-hidden"
+  style={{ padding: "100px 5% 80px" }}
+>
       <HeroScene />
       {/* Background */}
       <div className="absolute inset-0 bg-grid opacity-60" />
@@ -144,7 +145,7 @@ export default function Hero() {
               HACKATHON
             </span> */}
             {/* <br /> */}
-            THAT <span >FUNDS</span> YOU <span
+            THAT <span >FUNDS</span> YOUR <span
               style={{
                 WebkitTextStroke: "2px rgba(230,237,243,0.8)",
                 color: "transparent",
@@ -238,30 +239,30 @@ export default function Hero() {
             >
               // EVENT AT A GLANCE
             </p>
-
-            <div className="grid grid-cols-2 gap-5 mb-8">
-              {stats.map((s, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.5 + i * 0.1 }}
-                >
-                  <div
-                    className="font-syne font-extrabold text-4xl leading-none"
-                    style={{ color: "#9BE931" }}
-                  >
-                    {s.num}
-                  </div>
-                  <div
-                    className="font-body text-xs mt-1"
-                    style={{ color: "rgba(230,237,243,0.4)" }}
-                  >
-                    {s.label}
-                  </div>
-                </motion.div>
-              ))}
-            </div>
+<div className="grid grid-cols-3 gap-5 mb-8 w-full max-w-sm mx-auto justify-items-center">
+  {stats.map((s, i) => (
+    <motion.div
+      key={i}
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.5 + i * 0.1 }}
+      className="text-center"
+    >
+      <div
+        className="font-syne font-extrabold text-4xl leading-none"
+        style={{ color: "#9BE931" }}
+      >
+        {s.num}
+      </div>
+      <div
+        className="font-body text-xs mt-1"
+        style={{ color: "rgba(230,237,243,0.4)" }}
+      >
+        {s.label}
+      </div>
+    </motion.div>
+  ))}
+</div>
 
             <div
               className="rounded-xl p-5 text-center"

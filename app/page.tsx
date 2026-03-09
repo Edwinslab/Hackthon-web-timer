@@ -95,7 +95,7 @@ export default function Home() {
         <Footer />
       </div>
 
-      {/* ✅ show terminal ONLY after intro */}
+      {/*  show terminal ONLY after intro */}
       {introComplete && <TerminalChat />}
     </>
   );

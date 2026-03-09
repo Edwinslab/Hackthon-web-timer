@@ -8,32 +8,26 @@ import {
   AnimatePresence,
 } from "framer-motion";
 import { useRef, useState, useEffect, useCallback } from "react";
+import Image from "next/image";
 
 const cards = [
   {
-    icon: "🎯",
+    icon: "/assets/Students.png",
     title: "Students Win",
     desc: "Real funding opportunities, hands-on mentorship from active investors, and incubation space for your venture.",
     accent: "rgba(155,233,49,0.15)",
     highlight: "#9BE931",
   },
   {
-    icon: "💼",
+    icon: "/assets/Investors.png",
     title: "Investors Win",
     desc: "Curated deal flow from vetted teams. Watch execution firsthand before committing a single rupee.",
     accent: "rgba(155,233,49,0.12)",
     highlight: "#9BE931",
   },
-  // {
-  //   icon: "🏛️",
-  //   title: "College Wins",
-  //   desc: "Establishes Alvas as a premier startup hub with equity-backed sustainability model for future editions.",
-  //   accent: "rgba(155,233,49,0.10)",
-  //   highlight: "#9BE931",
-  // },
 ];
 
-/* ── Animated number ───────────────────────────────────────────── */
+/* ── Animated number ─────────────────────────────────────────── */
 function AnimatedNumber({ value, inView }: { value: string; inView: boolean }) {
   return (
     <motion.span
@@ -48,7 +42,7 @@ function AnimatedNumber({ value, inView }: { value: string; inView: boolean }) {
   );
 }
 
-/* ── Carousel dot indicator ────────────────────────────────────── */
+/* ── Carousel dot indicator ──────────────────────────────────── */
 function CarouselDots({
   total,
   active,
@@ -72,10 +66,8 @@ function CarouselDots({
             style={{
               width: i === active ? 28 : 8,
               height: 8,
-              background:
-                i === active ? "#9BE931" : "rgba(155,233,49,0.2)",
-              boxShadow:
-                i === active ? "0 0 12px rgba(155,233,49,0.5)" : "none",
+              background: i === active ? "#9BE931" : "rgba(155,233,49,0.2)",
+              boxShadow: i === active ? "0 0 12px rgba(155,233,49,0.5)" : "none",
             }}
           />
         </button>
@@ -84,7 +76,7 @@ function CarouselDots({
   );
 }
 
-/* ── Progress bar for auto-rotate timer ────────────────────────── */
+/* ── Progress bar for auto-rotate timer ─────────────────────── */
 function AutoPlayProgress({
   isActive,
   duration,
@@ -112,7 +104,7 @@ function AutoPlayProgress({
   );
 }
 
-// Framer motion variants for stagger
+/* ── Framer motion variants ──────────────────────────────────── */
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
@@ -133,7 +125,7 @@ const itemVariants = {
   },
 };
 
-/* ── Slide animation variants ─────────────────────────────────── */
+/* ── Slide animation variants ────────────────────────────────── */
 const slideVariants = {
   enter: (direction: number) => ({
     x: direction > 0 ? 120 : -120,
@@ -162,61 +154,20 @@ const slideVariants = {
   }),
 };
 
-/* ── Background card (peek) ───────────────────────────────────── */
-function PeekCard({
-  card,
-  side,
-  onClick,
-}: {
-  card: (typeof cards)[0];
-  side: "left" | "right";
-  onClick: () => void;
-}) {
-  return (
-    <motion.div
-      onClick={onClick}
-      initial={{ opacity: 0, x: side === "left" ? -40 : 40 }}
-      animate={{ opacity: 1, x: 0 }}
-      className="absolute top-1/2 -translate-y-1/2 hidden lg:block cursor-pointer"
-      style={{
-        [side]: -24,
-        width: 60,
-        zIndex: 1,
-      }}
-      whileHover={{
-        scale: 1.05,
-        x: side === "left" ? 6 : -6,
-      }}
-    >
-      <div
-        className="rounded-xl p-3 flex items-center justify-center backdrop-blur-md"
-        style={{
-          background: "rgba(22,28,42,0.8)",
-          border: "1px solid rgba(155,233,49,0.15)",
-          height: 80,
-          boxShadow: "0 4px 30px rgba(0,0,0,0.3)",
-        }}
-      >
-        <span className="text-xl">{card.icon}</span>
-      </div>
-    </motion.div>
-  );
-}
-
-/* ── Main About Section ────────────────────────────────────────── */
+/* ── Main About Section ──────────────────────────────────────── */
 export default function About() {
   const sectionRef = useRef(null);
-  const cardsRef = useRef(null);
-  const textRef = useRef(null);
+  const cardsRef   = useRef(null);
+  const textRef    = useRef(null);
 
-  const inView = useInView(sectionRef, { once: true, margin: "-100px" });
-  const cardsInView = useInView(cardsRef, { once: true, margin: "-50px" });
-  const textInView = useInView(textRef, { once: true, margin: "-50px" });
+  const inView      = useInView(sectionRef, { once: true, margin: "-100px" });
+  const cardsInView = useInView(cardsRef,   { once: true, margin: "-50px"  });
+  const textInView  = useInView(textRef,    { once: true, margin: "-50px"  });
 
   /* ── Auto-rotating card state ── */
-  const [activeCard, setActiveCard] = useState(0);
-  const [direction, setDirection] = useState(1);
-  const [isPaused, setIsPaused] = useState(false);
+  const [activeCard,  setActiveCard]  = useState(0);
+  const [direction,   setDirection]   = useState(1);
+  const [isPaused,    setIsPaused]    = useState(false);
   const [progressKey, setProgressKey] = useState(0);
   const AUTO_PLAY_INTERVAL = 4000;
 
@@ -259,17 +210,9 @@ export default function About() {
     damping: 30,
   });
 
-  const bgY = useTransform(smoothProgress, [0, 1], [100, -100]);
-  const lineWidth = useTransform(smoothProgress, [0.1, 0.4], ["0%", "100%"]);
-  const glowOpacity = useTransform(
-    smoothProgress,
-    [0.2, 0.5, 0.8],
-    [0.1, 0.4, 0.1]
-  );
-
-  /* Prev / next peek indices */
-  const prevIndex = (activeCard - 1 + cards.length) % cards.length;
-  const nextIndex = (activeCard + 1) % cards.length;
+  const bgY         = useTransform(smoothProgress, [0, 1],           [100, -100]);
+  const lineWidth   = useTransform(smoothProgress, [0.1, 0.4],       ["0%", "100%"]);
+  const glowOpacity = useTransform(smoothProgress, [0.2, 0.5, 0.8],  [0.1, 0.4, 0.1]);
 
   return (
     <section
@@ -286,23 +229,17 @@ export default function About() {
         <div
           className="absolute rounded-full blur-[100px]"
           style={{
-            width: 800,
-            height: 800,
-            background:
-              "radial-gradient(circle, rgba(155,233,49,0.08) 0%, transparent 60%)",
-            top: -200,
-            left: -300,
+            width: 800, height: 800,
+            background: "radial-gradient(circle, rgba(155,233,49,0.08) 0%, transparent 60%)",
+            top: -200, left: -300,
           }}
         />
         <div
           className="absolute rounded-full blur-[80px]"
           style={{
-            width: 600,
-            height: 600,
-            background:
-              "radial-gradient(circle, rgba(155,233,49,0.05) 0%, transparent 70%)",
-            bottom: -100,
-            right: -200,
+            width: 600, height: 600,
+            background: "radial-gradient(circle, rgba(155,233,49,0.05) 0%, transparent 70%)",
+            bottom: -100, right: -200,
           }}
         />
       </motion.div>
@@ -315,13 +252,13 @@ export default function About() {
         <div
           className="w-full h-full"
           style={{
-            background:
-              "linear-gradient(to right, transparent, rgba(155,233,49,0.4), transparent)",
+            background: "linear-gradient(to right, transparent, rgba(155,233,49,0.4), transparent)",
           }}
         />
       </motion.div>
 
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start relative z-10">
+
         {/* ── Left: Text Content ── */}
         <motion.div
           ref={textRef}
@@ -364,9 +301,9 @@ export default function About() {
             className="font-body leading-relaxed mb-8"
             style={{ color: "rgba(230,237,243,0.6)", fontSize: "0.95rem" }}
           >
-            By selecting  top startup ideas and inviting investors to sponsor
-            the event in exchange for first access, we create a win-win
-            ecosystem where everyone has genuine skin in the game.
+            By selecting top startup ideas and inviting investors to sponsor the
+            event in exchange for first access, we create a win-win ecosystem
+            where everyone has genuine skin in the game.
           </motion.p>
 
           {/* ── Animated Stats Row ── */}
@@ -374,24 +311,20 @@ export default function About() {
             variants={itemVariants}
             className="grid grid-cols-3 gap-6 py-6"
             style={{
-              borderTop: "1px solid rgba(155,233,49,0.15)",
+              borderTop:    "1px solid rgba(155,233,49,0.15)",
               borderBottom: "1px solid rgba(155,233,49,0.15)",
             }}
           >
             {[
-              { val: "₹1L +", label: "Prize Pool" },
-              { val: "3", label: "Domains" },
-              { val: "48h", label: "Build Sprint" },
+              { val: "₹1L+", label: "Prize Pool"  },
+              { val: "3",    label: "Domains"      },
+              { val: "96h",  label: "Build Sprint" },
             ].map((stat, i) => (
               <motion.div
                 key={i}
                 initial={{ opacity: 0, y: 15 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{
-                  delay: 0.4 + i * 0.15,
-                  duration: 0.5,
-                  type: "spring",
-                }}
+                transition={{ delay: 0.4 + i * 0.15, duration: 0.5, type: "spring" }}
                 className="text-center"
               >
                 <AnimatedNumber value={stat.val} inView={inView} />
@@ -408,18 +341,14 @@ export default function About() {
 
         {/* ── Right: Auto-rotating Cards Carousel ── */}
         <div ref={cardsRef} className="flex flex-col items-center gap-6">
-          {/* Card carousel container */}
+
+          {/* Card carousel — no peek cards, clean edges */}
           <div
             className="relative w-full"
             style={{ minHeight: 280, perspective: 1200 }}
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
           >
-            {/* Peek cards on sides (desktop) */}
-            <PeekCard card={cards[prevIndex]} side="left" onClick={prevCard} />
-            <PeekCard card={cards[nextIndex]} side="right" onClick={nextCard} />
-
-            {/* Main animated card */}
             <AnimatePresence mode="wait" custom={direction}>
               <motion.div
                 key={activeCard}
@@ -431,13 +360,12 @@ export default function About() {
                 className="relative w-full"
               >
                 <div
-                  className="rounded-2xl p-8 md:p-10 relative overflow-hidden group cursor-default"
+                  className="rounded-2xl p-8 md:p-10 relative overflow-hidden cursor-default"
                   style={{
                     background: "rgba(22, 28, 42, 0.7)",
                     backdropFilter: "blur(16px)",
                     border: "1px solid rgba(155,233,49,0.18)",
-                    boxShadow:
-                      "0 20px 60px rgba(0,0,0,0.3), inset 0 1px 0 rgba(155,233,49,0.08)",
+                    boxShadow: "0 20px 60px rgba(0,0,0,0.3), inset 0 1px 0 rgba(155,233,49,0.08)",
                   }}
                 >
                   {/* Animated gradient background */}
@@ -450,11 +378,7 @@ export default function About() {
                         "radial-gradient(ellipse at 20% 50%, rgba(155,233,49,0.04) 0%, transparent 60%)",
                       ],
                     }}
-                    transition={{
-                      duration: 6,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                    }}
+                    transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
                   />
 
                   {/* Green accent line on left */}
@@ -464,8 +388,7 @@ export default function About() {
                     animate={{ height: "100%", opacity: 1 }}
                     transition={{ duration: 0.6, ease: "circOut", delay: 0.15 }}
                     style={{
-                      background:
-                        "linear-gradient(to bottom, transparent, #9BE931, transparent)",
+                      background: "linear-gradient(to bottom, transparent, #9BE931, transparent)",
                       boxShadow: "0 0 12px rgba(155,233,49,0.6)",
                     }}
                   />
@@ -487,8 +410,10 @@ export default function About() {
 
                   {/* Card content */}
                   <div className="relative z-10">
+
+                    {/* Icon */}
                     <motion.div
-                      className="w-14 h-14 rounded-xl flex items-center justify-center text-3xl mb-6 relative"
+                      className="w-14 h-14 rounded-xl flex items-center justify-center mb-6 overflow-hidden"
                       style={{
                         background: cards[activeCard].accent,
                         border: "1px solid rgba(155,233,49,0.25)",
@@ -503,7 +428,13 @@ export default function About() {
                         delay: 0.1,
                       }}
                     >
-                      {cards[activeCard].icon}
+                      <Image
+                        src={cards[activeCard].icon}
+                        alt={cards[activeCard].title}
+                        width={36}
+                        height={36}
+                        className="object-contain"
+                      />
                     </motion.div>
 
                     <motion.h3
@@ -530,7 +461,7 @@ export default function About() {
             </AnimatePresence>
           </div>
 
-          {/* ── Controls: Dots + Arrows + Progress ── */}
+          {/* ── Controls: Prev Arrow + Dots + Progress + Next Arrow ── */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={cardsInView ? { opacity: 1, y: 0 } : {}}
@@ -542,7 +473,7 @@ export default function About() {
               onClick={prevCard}
               whileHover={{ scale: 1.15, x: -2 }}
               whileTap={{ scale: 0.9 }}
-              className="w-10 h-10 rounded-full flex items-center justify-center transition-colors duration-200 cursor-pointer"
+              className="w-10 h-10 rounded-full flex items-center justify-center cursor-pointer"
               style={{
                 background: "rgba(155,233,49,0.06)",
                 border: "1px solid rgba(155,233,49,0.2)",
@@ -551,14 +482,9 @@ export default function About() {
               aria-label="Previous card"
             >
               <svg
-                width="16"
-                height="16"
-                viewBox="0 0 16 16"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
+                width="16" height="16" viewBox="0 0 16 16"
+                fill="none" stroke="currentColor"
+                strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
               >
                 <path d="M10 12L6 8l4-4" />
               </svg>
@@ -571,7 +497,7 @@ export default function About() {
               onSelect={(i) => goToCard(i)}
             />
 
-            {/* Progress */}
+            {/* Progress bar */}
             <AutoPlayProgress
               key={progressKey}
               isActive={!isPaused && cardsInView}
@@ -583,7 +509,7 @@ export default function About() {
               onClick={nextCard}
               whileHover={{ scale: 1.15, x: 2 }}
               whileTap={{ scale: 0.9 }}
-              className="w-10 h-10 rounded-full flex items-center justify-center transition-colors duration-200 cursor-pointer"
+              className="w-10 h-10 rounded-full flex items-center justify-center cursor-pointer"
               style={{
                 background: "rgba(155,233,49,0.06)",
                 border: "1px solid rgba(155,233,49,0.2)",
@@ -592,14 +518,9 @@ export default function About() {
               aria-label="Next card"
             >
               <svg
-                width="16"
-                height="16"
-                viewBox="0 0 16 16"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
+                width="16" height="16" viewBox="0 0 16 16"
+                fill="none" stroke="currentColor"
+                strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
               >
                 <path d="M6 4l4 4-4 4" />
               </svg>
@@ -616,6 +537,7 @@ export default function About() {
           >
             {isPaused ? "PAUSED — HOVER TO BROWSE" : "AUTO-PLAYING"}
           </motion.p>
+
         </div>
       </div>
     </section>
