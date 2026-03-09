@@ -62,7 +62,7 @@ export default function Stages() {
       <div className="sticky top-0 flex h-screen items-center overflow-hidden" style={{ background: "#111620" }}>
         
         {/* Sticky Header */}
-        <div className="absolute top-16 md:top-24 left-6 md:left-16 lg:left-24 z-10 pointer-events-none">
+        <div className="absolute top-18 md:top-24 left-6 md:left-16 lg:left-24 z-10 pointer-events-none">
           <p className="font-mono text-xs tracking-[0.3em] uppercase mb-4" style={{ color: "#9BE931" }}>
             // Competition Formate
           </p>
