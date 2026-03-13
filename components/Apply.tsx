@@ -8,7 +8,7 @@ const DOMAINS = [
     name: "WildCard",
     href: "/wildcard",
     tag: "01",
-    desc: "Build anything — your rules",
+    desc: "Build anything your rules",
     detail: "No domain restrictions. Any problem, any solution.",
   },
   {
