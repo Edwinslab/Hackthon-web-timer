@@ -462,7 +462,8 @@ export default function ProposalViewer() {
                 }}
               >
                 <iframe
-                  src="/proposal-guidelines.pdf#page=1&toolbar=0&navpanes=0&scrollbar=0&view=FitH&t=${Date.now()}`}"
+                  // src="/proposal-guidelines.pdf#page=1&toolbar=0&navpanes=0&scrollbar=0&view=FitH&t=${Date.now()}`}"
+                   src="/pdfjs/web/viewer.html?file=/proposal-guidelines.pdf#toolbar=0&navpanes=0&scrollbar=0&view=FitH&t=${Date.now()}`}"
                   title="Proposal Guidelines"
                   style={{
                     width: "100%",
